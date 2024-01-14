@@ -28,6 +28,7 @@ Future<Movie> fetchGptResponse(String userMessage, User user, Set<String> select
       lines.removeAt(2);
       lines.removeAt(3);
       lines.removeAt(4);
+      lines.removeAt(5);
       
 
       // Write the remaining lines back to the file
@@ -57,7 +58,7 @@ Future<Movie> fetchGptResponse(String userMessage, User user, Set<String> select
 
   if (response.statusCode == 200) {
     // return Movie.fromJson(jsonDecode(response.body)['choices'][0]['text']);
-    print('Raw response: ${response.body}');
+    // print('Raw response: ${response.body}');
     // String Title = response.body["content"]["title"];
     // print("Title: "+Title);
     // var data = jsonDecode(response.body);
@@ -67,8 +68,8 @@ Future<Movie> fetchGptResponse(String userMessage, User user, Set<String> select
     var content = data['choices'][0]['message']['content'];
     return parseMovieFromContent(content, user);
   } else {
-    print('Status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    // print('Status code: ${response.statusCode}');
+    // print('Response body: ${response.body}');
     throw Exception('Failed to load response from OpenAI');
   }
 
@@ -93,28 +94,17 @@ Future<Movie> fetchGptResponse(String userMessage, User user, Set<String> select
   );
 
   if (response.statusCode == 200) {
-    // return Movie.fromJson(jsonDecode(response.body)['choices'][0]['text']);
-    print('Raw response: ${response.body}');
-    // String Title = response.body["content"]["title"];
-    // print("Title: "+Title);
-    // var data = jsonDecode(response.body);
-    // var latestMessage = data['choices'][0]['message']['content'];
-    // return Movie.fromJson(jsonDecode(latestMessage));
+    // print('Raw response: ${response.body}');
     var data = jsonDecode(response.body);
     var content = data['choices'][0]['message']['content'];
     return parseMovieFromContent(content, user);
   } else {
-    print('Status code: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    // print('Status code: ${response.statusCode}');
+    // print('Response body: ${response.body}');
     throw Exception('Failed to load response from OpenAI');
   }
 
-
-
   }
-
-
-
   
 }
 
@@ -177,11 +167,11 @@ Movie parseMovieFromContent(String content, User user) {
 
 
 void writeResponseToFile(User user, Movie movie) async {
-  print("writeResponseToFile called"); // Debug print
+  // print("writeResponseToFile called"); // Debug print
   try {
     final directory = await getApplicationDocumentsDirectory();
     var file = File('${directory.path}/${user.username}_responses.txt');
-    print("Writing to file at: ${file.path}"); // Debug print
+    // print("Writing to file at: ${file.path}"); // Debug print
     // Append the movie title to the file
     var sink = file.openWrite(mode: FileMode.append);
     sink.writeln(movie.title);

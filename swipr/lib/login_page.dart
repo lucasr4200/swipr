@@ -79,20 +79,18 @@ Widget build(BuildContext context) {
               String password = _passwordController.text;
               if (checkLogin(username, password)) {
                 // Login successful
-                print("Login Successful");
+                // print("Login Successful");
                 _login();
-                // User user_logged_in = users.firstWhere((user) => user.username == username && user.password == password);
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(userLoggedIn: user_logged_in)),);
               } else {
                 // Login failed
-                print("Login Failed");
+                // print("Login Failed");
               }
             },
             child: const Text('Login',
             style: TextStyle(color: Colors.white),
             ),
           ),
-          // Add other widgets here...
+          // Add further widgets here
         ],
       ),
     ),
